@@ -25,7 +25,7 @@ EXCLUDED_PKGS=(
 
 PKGS=`go list github.com/hyperledger/fabric-ca/... | grep -v -f <(printf '%s\n' "${EXCLUDED_PKGS[@]}")`
 
-gocov test -timeout 15m $PKGS | gocov-xml > coverage.xml
+GO_TAGS="${GO_TAGS} pkcs11" gocov test -timeout 15m $PKGS | gocov-xml > coverage.xml
 } 2>&1 | tee /tmp/test.results
 
 echo "Finished running all tests"
